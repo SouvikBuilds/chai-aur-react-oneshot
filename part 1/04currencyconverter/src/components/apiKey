@@ -1,0 +1,3 @@
+ const apiKey = "e3b5823bccc571ccf87088b0"
+
+ export default apiKey
