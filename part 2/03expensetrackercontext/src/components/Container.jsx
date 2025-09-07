@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useExpense } from "../contexts/ExpenseContext";
 
 const Container = () => {
@@ -8,7 +8,18 @@ const Container = () => {
   const [amount, setAmount] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [totalExpense, setTotalExpense] = useState(0);
 
+  const handleTotal = () => {
+    let total = 0;
+    expenses.forEach((exp) => {
+      total += exp.amount;
+    });
+    setTotalExpense(total);
+  };
+  useEffect(() => {
+    handleTotal();
+  }, [expenses]);
   const add = (e) => {
     e.preventDefault();
     if (!name || !amount) return;
@@ -174,6 +185,12 @@ const Container = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Total Amount Section */}
+
+      <h1 className="text-4xl text-white font-semibold">
+        Total: ₹{totalExpense}
+      </h1>
     </div>
   );
 };
